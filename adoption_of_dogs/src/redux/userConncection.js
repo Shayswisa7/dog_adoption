@@ -74,14 +74,19 @@ export const userConnSlice = createSlice({
     },
   },
   extraReducers: {
-    [userConnection.pending]: (state) => {
+    [userConnection.pending]: (state,{payload}) => {
       state.status = 'loading';
     },
     [userConnection.fulfilled]: (state, { payload }) => {
-      state.obj.email = payload.email;
-      state.obj.password = payload.password;
-      state.obj.dogsList = payload.dogsList;
-      state.status = 'success';
+      if(payload !== false){
+
+        state.obj.email = payload.email;
+        state.obj.password = payload.password;
+        state.obj.dogsList = payload.dogsList;
+        state.status = 'success';
+      }
+      else
+      state.status = 'false';
     },
     [userConnection.rejected]: (state, { payload }) => {
       state.status = 'failed';

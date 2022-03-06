@@ -34,7 +34,7 @@ app.use(
     extended: true,
   })
 );
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 //                                     Users
@@ -54,7 +54,7 @@ app.post('/UserConnection', (req, res) => {
     let result = connectionByUserEmail(
       req.body.obj.email,
       req.body.obj.password
-    );
+      );
     let resultNew;
     result.then((result) => res.send(result)).catch((err) => console.log(err));
   }
@@ -191,5 +191,7 @@ app.use((error, req, res, next) => {
     },
   });
 });
+
+
 // Start Server
 app.listen(8000, () => console.log('server started on port 8000...'));

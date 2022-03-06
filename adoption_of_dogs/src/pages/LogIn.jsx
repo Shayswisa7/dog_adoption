@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { userConnection } from '../redux/userConncection';
@@ -6,6 +6,7 @@ import { userConnection } from '../redux/userConncection';
 const LogIn = () => {
   const user = useSelector((state) => state.user);
   console.log(user);
+  const [ s , setS ] = useState('s');
   const dispatch = useDispatch();
   const {
     register,
@@ -15,7 +16,25 @@ const LogIn = () => {
 
   const onSubmit = (data) => {
     dispatch(userConnection({ email: data.email, password: data.password }));
+    setS('');
   };
+   useEffect(()=>{
+      if(user.status === 'false' ){
+        console.log("user not exist");
+        alert('user not exist!')
+      }
+      if(user.status === 'success'){
+        window.location.href = '/AdoptionDogs'
+      }
+    
+   },[user.status])
+
+  //  useEffect(() => {
+  //    if(user.status == 'success'){
+  //      window.localStorage.setItem('User', user.obj)
+  //    }
+  //  }, [user])
+
   return (
     <React.Fragment>
       <div className="">

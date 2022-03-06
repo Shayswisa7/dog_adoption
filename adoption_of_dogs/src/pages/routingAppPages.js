@@ -11,7 +11,7 @@ const AllRoutes = () => {
     <div className="allRoutes">
       <Routes>
         {/*Route of home page.*/}
-        <Route id="Home" path="/" exact element={<Home />} exact={true}></Route>
+        <Route id="Home" path="/" exact element={<Home />}></Route>
         {/*Route of createUser page.*/}
         <Route
           id="CreateUser"
