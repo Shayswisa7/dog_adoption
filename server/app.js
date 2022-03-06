@@ -50,13 +50,19 @@ const connectionByUserEmail = async (email, password) => {
 
 app.post('/UserConnection', (req, res) => {
   console.log(req.body.obj);
+ 
   if (req.body.type === 'User') {
     let result = connectionByUserEmail(
       req.body.obj.email,
       req.body.obj.password
       );
     let resultNew;
-    result.then((result) => res.send(result)).catch((err) => console.log(err));
+
+    result.then((result) => {res.send(result); console.log(result,"rrrrrrrrrrrr");}).catch((err) => console.log(err));
+  }
+  else{
+    console.log('lsdjflkjsdklj');
+    res.send('no users');
   }
 });
 

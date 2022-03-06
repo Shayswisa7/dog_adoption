@@ -66,6 +66,12 @@ export const userConnSlice = createSlice({
       state.obj.dogsList = state.obj.dogsList.filter((x, i) => i != payload);
       state.status = 'success';
     },
+    logIn: (state,{payload}) => {
+      state.obj.email = payload.email;
+      state.obj.password = payload.password;
+      state.obj.dogsList = payload.dogsList;
+      state.status = 'success';
+    },
     logOut: (state) => {
       state.obj.email = '';
       state.obj.password = '';
@@ -78,7 +84,7 @@ export const userConnSlice = createSlice({
       state.status = 'loading';
     },
     [userConnection.fulfilled]: (state, { payload }) => {
-      if(payload !== false){
+      if(payload){
 
         state.obj.email = payload.email;
         state.obj.password = payload.password;
@@ -117,5 +123,5 @@ export const userConnSlice = createSlice({
     },
   },
 });
-export const { clearState, logOut, addDog, removeDog } = userConnSlice.actions;
+export const { clearState, logOut ,logIn , addDog, removeDog } = userConnSlice.actions;
 export default userConnSlice.reducer;

@@ -21,19 +21,20 @@ const LogIn = () => {
    useEffect(()=>{
       if(user.status === 'false' ){
         console.log("user not exist");
-        alert('user not exist!')
+        alert('error!')
       }
       if(user.status === 'success'){
+        localStorage.setItem('User', JSON.stringify(user));
         window.location.href = '/AdoptionDogs'
       }
     
    },[user.status])
 
-  //  useEffect(() => {
-  //    if(user.status == 'success'){
-  //      window.localStorage.setItem('User', user.obj)
-  //    }
-  //  }, [user])
+  useEffect(() => {
+    if(user.status === 'success'){
+      window.localStorage.setItem('User', JSON.stringify(user.obj));
+    }
+  }, [user])
 
   return (
     <React.Fragment>

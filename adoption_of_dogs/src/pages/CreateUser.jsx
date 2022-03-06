@@ -15,18 +15,13 @@ const CreateUser = () => {
   let i = 0;
   const he = ['מייל', 'סיסמה', 'אישור סיסמה'];
   let s = 0;
-  const showMessage = (err) => {
-    return (
-      <div className="col-4">
-        <div className="alert alert-warning">
-          <strong>{he[i - 1]}!</strong>
-          <a href="#" className="alert-link">
-            {err}
-          </a>
-        </div>
-      </div>
-    );
-  };
+  
+  useDispatch(()=>{
+    if(user.obj.status === 'no users'){
+      alert("משתמש כבר קיים");
+    }
+    
+  },[user.obj.status])
   const createUser = async (email, password) => {
     const result = await axios.post('http://localhost:8000/CreateUser', {
       type: 'User',
@@ -46,7 +41,7 @@ const CreateUser = () => {
       let result = createUser(data.email, data.password);
       if (result.error)
         result.then((result) => {
-          console.log(
+          alert(
             'error:',
             Object.keys(result.error)[0],
             result.error[Object.keys(result.error)[0]] + '.',
@@ -56,7 +51,10 @@ const CreateUser = () => {
         });
       else {
         result.then((result) => {
-          console.log(result, 'hfdgkjdfhgkjdfgdf');
+          console.log(result);
+          alert(
+            Object.keys(result.error)[0]
+          );
         });
       }
     }
