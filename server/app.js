@@ -56,7 +56,7 @@ app.post('/UserConnection', (req, res) => {
       req.body.obj.password
     );
     let resultNew;
-    result.then((result) => res.send(result)).catch((err) => console.log(err));
+    result.then((result) => res.send(result)).catch((err) => res.send(false));
   }
 });
 

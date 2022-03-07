@@ -13,6 +13,8 @@ const AdoptionDogs = () => {
   const user = useSelector((state) => state.user);
 
   const [isAvilable, setIsAvilable] = useState(true);
+
+  // add dog to the user
   const adoption = (index) => {
     console.log(allDogs.obj[index]);
     dispatch(
@@ -22,6 +24,9 @@ const AdoptionDogs = () => {
       })
     );
     dispatch(addDog(Object.assign(allDogs.obj[index])));
+    let localDogs = JSON.parse(localStorage.getItem('User'));
+    localDogs.dogsList.push(Object.assign(allDogs.obj[index]));
+    localStorage.setItem('User', JSON.stringify(localDogs));
     dispatch(setValuesByKey1({ key: index, value: false }));
     dispatch(postAvilable({ obj: allDogs.obj[index], avilable: false }));
   };

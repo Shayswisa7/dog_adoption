@@ -6,10 +6,13 @@ import { removeDogFromDogList } from '../redux/userConncection';
 import { postAvilable } from '../redux/allDogs';
 import { setValuesByKey1 } from '../redux/allDogs';
 import axios from 'axios';
+import { useEffect } from 'react';
+import { useState } from 'react';
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const allDogs = useSelector((state) => state.allDogs);
+  const [isDel, setIsDel] = useState(false);
   const removeDog = (i) => {
     console.log(user);
     console.log(allDogs);
@@ -50,7 +53,9 @@ const Home = () => {
           obj: user.obj,
         });
         const data = result.data;
+        localStorage.setItem('User', '');
         dispatch(logOut());
+        setIsDel(true);
         console.log(data);
       } catch (err) {
         console.log(err);
@@ -59,6 +64,13 @@ const Home = () => {
       console.log('not deleted!');
     }
   };
+  useEffect(() => {
+    if (isDel) {
+      window.location.pathname = '/';
+      window.localStorage.url = window.location.pathname;
+      setIsDel(false);
+    }
+  }, [user.obj.email]);
   return (
     <React.Fragment>
       <h2>בית</h2>

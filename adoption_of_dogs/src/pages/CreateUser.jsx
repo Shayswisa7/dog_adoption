@@ -44,19 +44,16 @@ const CreateUser = () => {
       alert('הסיסמאות לא שוות!');
     } else {
       let result = createUser(data.email, data.password);
-      if (result.error)
+      if (result) {
         result.then((result) => {
-          console.log(
-            'error:',
-            Object.keys(result.error)[0],
-            result.error[Object.keys(result.error)[0]] + '.',
-            'message: ',
-            result.mess
-          );
-        });
-      else {
-        result.then((result) => {
-          console.log(result, 'hfdgkjdfhgkjdfgdf');
+          console.log(result);
+          if (result.mess === 'alredy exist!') {
+            alert('user alredy exist!!');
+          } else {
+            alert('user created!!');
+            window.location.pathname = '/Login';
+            window.localStorage.url = window.location.pathname;
+          }
         });
       }
     }

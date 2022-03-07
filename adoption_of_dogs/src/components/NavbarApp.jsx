@@ -8,8 +8,10 @@ import * as Icon from 'react-bootstrap-icons';
 
 function logOut(dispatch) {
   let text = 'אתה בטוח שאתה רוצה להתנתק';
-  if (window.confirm(text) === true)
+  if (window.confirm(text) === true) {
     dispatch(logOutAction({ key: 'email', value: '' }));
+    localStorage.setItem('User', '');
+  }
 }
 const NavbarApp = () => {
   const user = useSelector((state) => state.user);
